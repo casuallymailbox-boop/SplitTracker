@@ -191,10 +191,35 @@ async function loadStats() {
     const filterValue = statsFilter.value;
     
     try {
-        const { data: allWorkouts, error } = await supabase
+        let query = supabase
             .from('workouts')
             .select('*')
             .order('created_at', { ascending: true });
+        
+        // Apply date filter for stats
+        const now = new Date();
+        let startDate;
+        
+        switch (filterValue) {
+            case 'days':
+                startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                query = query.gte('created_at', startDate.toISOString());
+                break;
+            case 'weeks':
+                startDate = new Date(now.getTime() - 4 * 7 * 24 * 60 * 60 * 1000);
+                query = query.gte('created_at', startDate.toISOString());
+                break;
+            case 'months':
+                startDate = new Date(now.getTime() - 6 * 30 * 24 * 60 * 60 * 1000);
+                query = query.gte('created_at', startDate.toISOString());
+                break;
+            case 'years':
+                startDate = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
+                query = query.gte('created_at', startDate.toISOString());
+                break;
+        }
+        
+        const { data: allWorkouts, error } = await query;
         
         if (error) throw error;
         
@@ -231,7 +256,7 @@ async function loadStats() {
         // Update stat cards
         document.getElementById('total-workouts').textContent = totalWorkouts;
         document.getElementById('total-volume').textContent = totalVolume.toLocaleString(undefined, { maximumFractionDigits: 1 });
-        document.getElementById('most-split').textContent = mostSplit.charAt(0).toUpperCase() + mostSplit.slice(1);
+        document.getElementById('most-split').textContent = mostSplit !== '-' ? mostSplit.charAt(0).toUpperCase() + mostSplit.slice(1) : '-';
         document.getElementById('avg-per-week').textContent = avgPerWeek;
         
         // Render split distribution chart
@@ -242,6 +267,8 @@ async function loadStats() {
         
     } catch (error) {
         console.error('Error loading stats:', error);
+        document.getElementById('split-chart').innerHTML = '<p class="error-message">Failed to load statistics</p>';
+        document.getElementById('timeline-chart').innerHTML = '<p class="error-message">Failed to load statistics</p>';
     }
 }
 
