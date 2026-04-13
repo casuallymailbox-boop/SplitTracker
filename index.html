@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💪 Workout Tracker</h1>
+            <p class="subtitle">Track your fitness journey</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="log">Log Workout</button>
+            <button class="tab-btn" data-tab="history">History</button>
+            <button class="tab-btn" data-tab="stats">Statistics</button>
+        </nav>
+
+        <!-- Log Workout Section -->
+        <section id="log" class="tab-content active">
+            <form id="workout-form">
+                <div class="form-group">
+                    <label for="split">Split Type</label>
+                    <select id="split" required>
+                        <option value="">Select Split</option>
+                        <option value="push">Push</option>
+                        <option value="pull">Pull</option>
+                        <option value="shoulder">Shoulder</option>
+                        <option value="legs">Legs</option>
+                        <option value="upper">Upper</option>
+                        <option value="arms">Arms</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="exercise">Exercise Name</label>
+                    <input type="text" id="exercise" placeholder="e.g., Bench Press" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sets">Sets</label>
+                        <input type="number" id="sets" min="1" placeholder="3" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reps">Reps</label>
+                        <input type="number" id="reps" min="1" placeholder="10" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weight">Weight (kg)</label>
+                        <input type="number" id="weight" min="0" step="0.5" placeholder="0" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Notes (Optional)</label>
+                    <textarea id="notes" rows="3" placeholder="Add any notes about this workout..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">Save Workout</button>
+            </form>
+        </section>
+
+        <!-- History Section -->
+        <section id="history" class="tab-content">
+            <div class="filter-controls">
+                <label for="history-filter">Filter by:</label>
+                <select id="history-filter">
+                    <option value="all">All Time</option>
+                    <option value="days">Last 7 Days</option>
+                    <option value="weeks">Last 4 Weeks</option>
+                    <option value="months">Last 6 Months</option>
+                    <option value="years">Last Year</option>
+                </select>
+
+                <label for="split-filter">Split:</label>
+                <select id="split-filter">
+                    <option value="all">All Splits</option>
+                    <option value="push">Push</option>
+                    <option value="pull">Pull</option>
+                    <option value="shoulder">Shoulder</option>
+                    <option value="legs">Legs</option>
+                    <option value="upper">Upper</option>
+                    <option value="arms">Arms</option>
+                </select>
+            </div>
+
+            <div id="history-list" class="workout-list">
+                <p class="loading">Loading workouts...</p>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section id="stats" class="tab-content">
+            <div class="filter-controls">
+                <label for="stats-filter">View by:</label>
+                <select id="stats-filter">
+                    <option value="days">Days</option>
+                    <option value="weeks">Weeks</option>
+                    <option value="months">Months</option>
+                    <option value="years">Years</option>
+                </select>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Workouts</h3>
+                    <p id="total-workouts">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Volume (kg)</h3>
+                    <p id="total-volume">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Most Used Split</h3>
+                    <p id="most-split">-</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Avg Workouts/Week</h3>
+                    <p id="avg-per-week">0</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3>Workout Distribution by Split</h3>
+                <div id="split-chart" class="split-chart"></div>
+            </div>
+
+            <div class="chart-container">
+                <h3>Workout Timeline</h3>
+                <div id="timeline-chart" class="timeline-chart"></div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
