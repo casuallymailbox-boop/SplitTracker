@@ -9,18 +9,20 @@
 <body>
     <div class="container">
         <header>
-            <h1>🏋️ Workout Tracker</h1>
-            <p class="subtitle">Track your Push, Pull, Shoulder, Leg, Upper, Arms, Leg split</p>
+            <h1>💪 Workout Tracker</h1>
+            <button id="theme-toggle" class="theme-btn" title="Toggle Dark Mode">
+                <span class="sun-icon">☀️</span>
+                <span class="moon-icon">🌙</span>
+            </button>
         </header>
 
-        <!-- Log Workout Section -->
-        <section class="card log-section">
-            <h2>Log Today's Workout</h2>
+        <section class="log-section">
+            <h2>Log Workout</h2>
             <form id="workout-form">
                 <div class="form-group">
                     <label for="workout-type">Workout Type</label>
                     <select id="workout-type" required>
-                        <option value="">Select workout type...</option>
+                        <option value="">Select workout...</option>
                         <option value="push">Push</option>
                         <option value="pull">Pull</option>
                         <option value="shoulder">Shoulder</option>
@@ -29,50 +31,46 @@
                         <option value="arms">Arms</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="workout-notes">Notes (optional)</label>
-                    <textarea id="workout-notes" rows="3" placeholder="e.g., Felt strong today, increased weight on bench press..."></textarea>
+                    <textarea id="workout-notes" rows="3" placeholder="e.g., Bench press 3x10, Squats 4x8..."></textarea>
                 </div>
-
                 <div class="form-group">
                     <label for="workout-date">Date</label>
                     <input type="date" id="workout-date" required>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Log Workout</button>
+                <button type="submit" class="btn-primary">Log Workout</button>
             </form>
         </section>
 
-        <!-- History Section -->
-        <section class="card history-section">
-            <div class="history-header">
-                <h2>Workout History</h2>
-                <div class="filter-controls">
-                    <select id="filter-type">
-                        <option value="all">All Types</option>
-                        <option value="push">Push</option>
-                        <option value="pull">Pull</option>
-                        <option value="shoulder">Shoulder</option>
-                        <option value="leg">Leg</option>
-                        <option value="upper">Upper</option>
-                        <option value="arms">Arms</option>
-                    </select>
-                </div>
-            </div>
-            <div id="history-list" class="history-list">
-                <!-- Workout entries will be inserted here -->
+        <section class="summary-section">
+            <h2>This Week's Summary</h2>
+            <div id="summary-container" class="summary-grid">
+                <!-- Summary cards will be inserted here -->
             </div>
         </section>
 
-        <!-- Summary Section -->
-        <section class="card summary-section">
-            <h2>Weekly Summary</h2>
-            <div id="summary-stats" class="summary-stats">
-                <!-- Summary stats will be inserted here -->
+        <section class="history-section">
+            <h2>Workout History</h2>
+            <div class="filter-controls">
+                <label for="filter-type">Filter by:</label>
+                <select id="filter-type">
+                    <option value="all">All Workouts</option>
+                    <option value="push">Push</option>
+                    <option value="pull">Pull</option>
+                    <option value="shoulder">Shoulder</option>
+                    <option value="leg">Leg</option>
+                    <option value="upper">Upper</option>
+                    <option value="arms">Arms</option>
+                </select>
+            </div>
+            <div id="history-container">
+                <!-- History items will be inserted here -->
             </div>
         </section>
     </div>
+
+    <div id="toast" class="toast"></div>
 
     <script src="app.js"></script>
 </body>
