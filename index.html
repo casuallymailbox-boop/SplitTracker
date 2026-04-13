@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏋️ Workout Tracker</h1>
+            <p class="subtitle">Track your Push, Pull, Shoulder, Leg, Upper, Arms, Leg split</p>
+        </header>
+
+        <!-- Log Workout Section -->
+        <section class="card log-section">
+            <h2>Log Today's Workout</h2>
+            <form id="workout-form">
+                <div class="form-group">
+                    <label for="workout-type">Workout Type</label>
+                    <select id="workout-type" required>
+                        <option value="">Select workout type...</option>
+                        <option value="push">Push</option>
+                        <option value="pull">Pull</option>
+                        <option value="shoulder">Shoulder</option>
+                        <option value="leg">Leg</option>
+                        <option value="upper">Upper</option>
+                        <option value="arms">Arms</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="workout-notes">Notes (optional)</label>
+                    <textarea id="workout-notes" rows="3" placeholder="e.g., Felt strong today, increased weight on bench press..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="workout-date">Date</label>
+                    <input type="date" id="workout-date" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Log Workout</button>
+            </form>
+        </section>
+
+        <!-- History Section -->
+        <section class="card history-section">
+            <div class="history-header">
+                <h2>Workout History</h2>
+                <div class="filter-controls">
+                    <select id="filter-type">
+                        <option value="all">All Types</option>
+                        <option value="push">Push</option>
+                        <option value="pull">Pull</option>
+                        <option value="shoulder">Shoulder</option>
+                        <option value="leg">Leg</option>
+                        <option value="upper">Upper</option>
+                        <option value="arms">Arms</option>
+                    </select>
+                </div>
+            </div>
+            <div id="history-list" class="history-list">
+                <!-- Workout entries will be inserted here -->
+            </div>
+        </section>
+
+        <!-- Summary Section -->
+        <section class="card summary-section">
+            <h2>Weekly Summary</h2>
+            <div id="summary-stats" class="summary-stats">
+                <!-- Summary stats will be inserted here -->
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
