@@ -1,6 +1,6 @@
 // Configuration for Supabase (you'll need to replace with your own credentials)
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://smxompwxxkcvhygordqx.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNteG9tcHd4eGtjdmh5Z29yZHF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwNzYyOTYsImV4cCI6MjA5MTY1MjI5Nn0.9SWSc915b-7bekinx0_RXgWCUSHNezJp8Qyzl7GM5l4';
 
 // For demo purposes, we'll use localStorage if Supabase is not configured
 let useSupabase = false;
