@@ -1,4 +1,4 @@
-// Configuration for Supabase (you'll need to replace with your own credentials)
+// Configuration for Supabase
 const SUPABASE_URL = 'https://smxompwxxkcvhygordqx.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNteG9tcHd4eGtjdmh5Z29yZHF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwNzYyOTYsImV4cCI6MjA5MTY1MjI5Nn0.9SWSc915b-7bekinx0_RXgWCUSHNezJp8Qyzl7GM5l4';
 
@@ -8,14 +8,21 @@ let supabaseClient = null;
 
 // Initialize Supabase client if credentials are provided
 async function initSupabase() {
-    if (SUPABASE_URL !== 'YOUR_SUPABASE_URL' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY') {
+    if (SUPABASE_URL && SUPABASE_ANON_KEY) {
         try {
-            const response = await fetch('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
-            // Dynamic import for Supabase
-            const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
-            supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            // Use the global supabase client from CDN
+            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
             useSupabase = true;
             console.log('Supabase initialized successfully');
+            
+            // Test connection
+            const { data, error } = await supabaseClient.from('workouts').select('id').limit(1);
+            if (error) {
+                console.warn('Supabase table not found or no access:', error.message);
+                console.log('Make sure you created the "workouts" table in Supabase');
+            } else {
+                console.log('Supabase connection verified');
+            }
         } catch (error) {
             console.warn('Supabase initialization failed, falling back to localStorage:', error);
             useSupabase = false;
